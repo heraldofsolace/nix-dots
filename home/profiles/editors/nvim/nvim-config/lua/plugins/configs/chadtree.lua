@@ -1,0 +1,1 @@
+require('legendary').bind_keymap({'<leader>ch', '<cmd>CHADopen<CR>'})

@@ -1,0 +1,1 @@
+require('legendary').bind_keymap({ '<leader>pg', ':Glow<cr>', opts={noremap=true} })
