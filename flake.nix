@@ -122,6 +122,7 @@
           set host-specific properties here
           */
           andromeda = {};
+          horologium = {};
         };
         importables = rec {
           profiles =
@@ -153,6 +154,23 @@
               misc.op
               misc.gparted
               security.sudo
+            ];
+            horologium = [
+              base
+              desktop-plasma
+              development.cc
+              development.node
+              development.python
+              development.rust
+              development.nix
+              development.ides.jetbrains
+              networking.common
+              networking.samba
+              services.docker
+              misc.op
+              misc.gparted
+              security.sudo
+              security.fingerprint
             ];
           };
         };
