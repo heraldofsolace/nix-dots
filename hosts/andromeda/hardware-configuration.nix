@@ -76,4 +76,6 @@
 
   hardware.logitech.wireless.enable = true;
   hardware.logitech.wireless.enableGraphical = true;
+
+  hardware.bluetooth.enable = true;
 }
