@@ -8,8 +8,10 @@
 
   networking.hosts = {
     "192.168.0.1" = ["router.home"];
-    "192.168.0.3" = ["pi.hole" "homeassistant.local"];
+    "192.168.0.3" = ["pi.hole"];
   };
+  networking.wireless.iwd.enable = true;
+  networking.networkmanager.wifi.backend = "iwd";
   networking.firewall.enable = true;
   networking.firewall.allowedTCPPorts = [5555 27183];
   networking.useDHCP = lib.mkDefault true;
