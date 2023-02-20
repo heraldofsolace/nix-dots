@@ -17,11 +17,11 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-  services.printing.drivers = [ pkgs.hplip ];
+  services.printing.drivers = [pkgs.hplip];
 
   hardware.sane.enable = true;
-  hardware.sane.extraBackends = [ pkgs.hplipWithPlugin pkgs.sane-airscan ];
-  
+  hardware.sane.extraBackends = [pkgs.hplipWithPlugin pkgs.sane-airscan];
+
   time.timeZone = "Asia/Kolkata";
 
   # Select internationalisation properties.

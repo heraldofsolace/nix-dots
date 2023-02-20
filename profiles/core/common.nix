@@ -42,6 +42,10 @@ in {
       ffmpeg-full
       audacity
       xsane
+      dosfstools
+      gptfdisk
+      iputils
+      usbutils
     ];
     shells = [pkgs.fish];
 
@@ -86,6 +90,22 @@ in {
       s = ifSudo "sudo -E ";
       si = ifSudo "sudo -i";
       se = ifSudo "sudoedit";
+
+      # nix
+      nrb = ifSudo "sudo nixos-rebuild";
+
+      # fix nixos-option for flake compat
+      nixos-option = "nixos-option -I nixpkgs=${self}/lib/compat";
+
+      # systemd
+      ctl = "systemctl";
+      stl = ifSudo "s systemctl";
+      utl = "systemctl --user";
+      ut = "systemctl --user start";
+      un = "systemctl --user stop";
+      up = ifSudo "s systemctl start";
+      dn = ifSudo "s systemctl stop";
+      jtl = "journalctl";
     };
   };
 
@@ -118,6 +138,10 @@ in {
 
       # Give root user and wheel group special Nix privileges.
       trusted-users = ["root" "@wheel"];
+      system-features = ["nixos-test" "benchmark" "big-parallel" "kvm"];
+      # Improve nix store disk usage
+      auto-optimise-store = true;
+      allowed-users = ["@wheel"];
     };
 
     # Generally useful nix option defaults
@@ -128,4 +152,33 @@ in {
       fallback = true
     '';
   };
+
+  fonts.fontconfig.defaultFonts = {
+    monospace = ["FiraCode Nerd Font Mono"];
+    sansSerif = ["DejaVu Sans"];
+  };
+
+  programs.bash = {
+    # Enable starship
+    promptInit = ''
+      eval "$(${pkgs.starship}/bin/starship init bash)"
+    '';
+    # Enable direnv, a tool for managing shell environments
+    interactiveShellInit = ''
+      eval "$(${pkgs.direnv}/bin/direnv hook bash)"
+    '';
+  };
+
+  programs.fuse = {
+    userAllowOther = true;
+  };
+
+  # For rage encryption, all hosts need a ssh key pair
+  services.openssh = {
+    enable = true;
+    openFirewall = lib.mkDefault false;
+  };
+
+  # Service that makes Out of Memory Killer more effective
+  services.earlyoom.enable = true;
 }
