@@ -5,7 +5,7 @@
   inputs,
   ...
 }: {
-  imports = [inputs.grub2-themes.nixosModule];
+  imports = [inputs.grub2-themes.nixosModules.default];
 
   boot.supportedFilesystems = ["zfs"];
   networking.hostId = "ab16568e";
