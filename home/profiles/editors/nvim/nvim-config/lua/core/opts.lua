@@ -12,7 +12,7 @@ vim.opt.signcolumn = 'number'
 
 -- shell
 
-vim.opt.shell = "/bin/bash"
+vim.opt.shell = "/run/current-system/sw/bin/bash"
 
 -- set font in gui
 if vim.opt.guifont then vim.opt.guifont = 'Fira Code' end
@@ -93,57 +93,3 @@ vim.cmd('syntax on')
 
 -- enable filetype detection
 vim.cmd('filetype plugin indent on')
-
-
-local autocmds = {
-    {
-        'TabLeave',
-        function() 
-            vim.g.lasttab = vim.fn.tabpagenr() 
-        end
-    },
-    {
-        'BufReadPost',
-        function()
-            if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
-                vim.api.nvim_command("normal! g'\"")
-            end
-        end
-    },
-    {
-        'WinEnter',
-        function()
-            if (vim.bo.filetype ~= 'dashboard') then
-                vim.opt.colorcolumn = "120"
-                vim.opt.cul = true
-            end
-        end
-    },
-    {
-        'WinLeave',
-        function()
-            if(vim.bo.filetype ~= 'dashboard') then
-                vim.opt.colorcolumn = "0"
-                vim.opt.cul = false
-            end
-        end
-    },
-    {
-        {'BufLeave','FocusLost','InsertEnter'},
-        function() 
-            if (vim.bo.filetype ~= 'dashboard') then
-                vim.opt.relativenumber = false 
-            end
-        end
-    },
-    {
-        {'BufEnter','FocusGained','InsertLeave'},
-        function() 
-            if (vim.bo.filetype ~= 'dashboard') then
-                vim.opt.relativenumber = true
-            end
-        end
-    }
-}
-
-require('legendary').bind_autocmds(autocmds)

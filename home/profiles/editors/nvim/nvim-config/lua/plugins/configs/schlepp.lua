@@ -12,4 +12,4 @@ local keymaps = {
     {'Dl', '<Plug>SchleppDupRight', opts={unique=true}, mode='v'},
 }
 
-require('legendary').bind_keymaps(keymaps)
+require('legendary').keymaps(keymaps)

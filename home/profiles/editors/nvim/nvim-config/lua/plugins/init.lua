@@ -1,216 +1,258 @@
-return require('packer').startup(function(use)
-    use {'wbthomason/packer.nvim', opt = true}
-    use {
+return require('lazy').setup({
+     {
         'b3nj5m1n/kommentary',
         config = function()
             require('kommentary.config').use_extended_mappings()
         end
-    }
-    use 'sheerun/vim-polyglot'
-    use 'arecarn/vim-crunch'
-    use { 'rrethy/vim-hexokinase', run = 'make hexokinase' }
-    use 'christoomey/vim-tmux-navigator'
-    use 'wellle/context.vim'
-    use 'gcmt/wildfire.vim'
-    use {
+    },
+     'sheerun/vim-polyglot',
+     'arecarn/vim-crunch',
+     'christoomey/vim-tmux-navigator',
+     'wellle/context.vim',
+     'gcmt/wildfire.vim',
+     {
         'glacambre/firenvim',
-        run = function() vim.fn['firenvim#install'](0) end
-    }
-    use {
+        build = function() vim.fn['firenvim#install'](0) end
+    },
+     {
         'npxbr/glow.nvim',
-        run = ':GlowInstall',
+        build = ':GlowInstall',
         cmd = "Glow",
-        setup = [[require('plugins.configs.glow_setup')]]
-    }
-    use 'junegunn/vim-peekaboo'
-    use {
+        init = function()
+            require('plugins.configs.glow_setup')
+        end
+    },
+     'junegunn/vim-peekaboo',
+     {
         'lervag/vimtex',
-        config = [[require('plugins.configs.vimtex')]],
-    }
-    use 'tpope/vim-dispatch'
-    use 'tpope/vim-rhubarb'
-    use 'tpope/vim-obsession'
-    use 'tpope/vim-jdaddy'
-    use {'mrjones2014/legendary.nvim'}
-    use {
+        config = function()
+            require('plugins.configs.vimtex')
+        end,
+    },
+     'tpope/vim-dispatch',
+     'tpope/vim-rhubarb',
+     'tpope/vim-obsession',
+     'tpope/vim-jdaddy',
+     {'mrjones2014/legendary.nvim', dependencies='kkharji/sqlite.lua'},
+     {
         'kristijanhusak/vim-dadbod-ui',
-        config = [[require('plugins.configs.dbui')]],
-    }
-    use 'direnv/direnv.vim'
-    use {
+        config = function()
+            require('plugins.configs.dbui')
+        end,
+    },
+     'direnv/direnv.vim',
+     {
         'maxbrunsfeld/vim-yankstack',
-        config = [[require('plugins.configs.yankstack')]],
-    }
-    use {
+        config = function()
+            require('plugins.configs.yankstack')
+        end,
+    },
+     {
         'puremourning/vimspector',
-        run = "python3 install_gadget.py --all --disable-tcl"
-    }
-    use 'lewis6991/impatient.nvim'
-    use {
+        build = "python3 install_gadget.py --all --disable-tcl"
+    },
+     'lewis6991/impatient.nvim',
+     {
       "folke/zen-mode.nvim",
-      config = [[require('plugins.configs.zen_mode')]],
-      setup = [[require('plugins.configs.zen_mode_setup')]],
+      config = function()
+        require('plugins.configs.zen_mode')
+      end,
+      init = function()
+        require('plugins.configs.zen_mode_setup')
+      end,
       cmd = "ZenMode"
-    }
+    },
 
-    use {
+     {
       "folke/twilight.nvim",
-      config = [[require('plugins.configs.twilight')]],
-    }
-    use {
+      config = function()
+        require('plugins.configs.twilight')
+      end,
+    },
+     {
       "folke/todo-comments.nvim",
-      requires = "nvim-lua/plenary.nvim",
-      config = [[require('plugins.configs.todo_comments')]],
-    }
-    use {
+      dependencies = "nvim-lua/plenary.nvim",
+      config = function()
+        require('plugins.configs.todo_comments')
+      end,
+    },
+     {
         'goolord/alpha-nvim',
-        requires = { 'kyazdani42/nvim-web-devicons' },
-        config = [[require('plugins.configs.alpha')]],
-    }
-    use 'michaeljsmith/vim-indent-object'
-    use {
+        dependencies = { 'kyazdani42/nvim-web-devicons' },
+        config = function()
+            require('plugins.configs.alpha')
+        end,
+    },
+     'michaeljsmith/vim-indent-object',
+     {
         'myusuf3/numbers.vim',
-        config = [[require('plugins.configs.numbers')]],
-    }
-    use { 'ms-jpq/coq_nvim',
+        config = function()
+            require('plugins.configs.numbers')
+        end,
+    },
+     { 'ms-jpq/coq_nvim',
         branch = 'coq',
-        setup=function()
+        init=function()
             vim.g.coq_settings = { auto_start='shut-up' }
         end,
-    }
-    use { 'ms-jpq/coq.artifacts', branch = 'artifacts' }
-    use { 'ms-jpq/coq.thirdparty',
+    },
+     { 'ms-jpq/coq.artifacts', branch = 'artifacts' },
+     { 'ms-jpq/coq.thirdparty',
             branch = '3p',
-            config = [[require('plugins.configs.coq')]],
-        }
-    use 'jubnzv/virtual-types.nvim'
-    use {
+            config = function()
+                require('plugins.configs.coq')
+            end,
+        },
+     'jubnzv/virtual-types.nvim',
+     {
         'ray-x/navigator.lua',
-        requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'},
-        config = [[require('plugins.configs.navigator')]],
-    }
-    use {
+        dependencies = {'ray-x/guihua.lua', build = 'cd lua/fzy && make'},
+        config = function()
+            require('plugins.configs.navigator')
+        end,
+    },
+     {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "neovim/nvim-lspconfig",
-        config=[[require('plugins.configs.nvim_lsp')]],
-    }
-    use 'nicwest/vim-http'
-    use {
+        config=function()
+            require('plugins.configs.nvim_lsp')
+        end,
+    },
+     'nicwest/vim-http',
+     {
         'ms-jpq/chadtree', 
         branch = "chad", 
-        run = "python3 -m chadtree deps",
-        config = [[require('plugins.configs.chadtree')]],
-    }
-    use 'tpope/vim-bundler'
-    use 'tpope/vim-dadbod'
-    use 'tpope/vim-eunuch'
-    use 'tpope/vim-projectionist'
-    use 'tpope/vim-rails'
-    use 'tpope/vim-speeddating'
-    use {
-        'tpope/vim-surround',
-        config = [[require('plugins.configs.surround')]],
-    }
-
-    use {
-        'turbio/bracey.vim',
-        run = "npm install --prefix server",
-        ft = {'html', 'css', 'javascript'},
-        cmd = "Bracey",
-        setup = [[require('plugins.configs.bracey_setup')]],
-    }
-    use {
-        'unblevable/quick-scope',
-        config = [[require('plugins.configs.quickscope')]],
-    }
-    use {
+        build = "python3 -m chadtree deps",
+        config = function()
+            require('plugins.configs.chadtree')
+        end,
+    },
+     'tpope/vim-bundler',
+     'tpope/vim-dadbod',
+     'tpope/vim-eunuch',
+     'tpope/vim-projectionist',
+     'tpope/vim-rails',
+     'tpope/vim-speeddating',
+     {
+        'kylechui/nvim-surround',
+        config = function()
+            require('plugins.configs.surround')
+        end,
+    },
+     {
         'vim-scripts/vim-auto-save',
-        config = [[require('plugins.configs.autosave')]],
-    }
-    use 'vimwiki/vimwiki'
-    use 'wakatime/vim-wakatime'
-    use {
+        config = function()
+            require('plugins.configs.autosave')
+        end,
+    },
+     'vimwiki/vimwiki',
+     'wakatime/vim-wakatime',
+     {
         'lewis6991/gitsigns.nvim',
-        requires = {'nvim-lua/plenary.nvim'},
-        config = [[require('plugins.configs.gitsigns')]],
-    }
-    use 'ryanoasis/vim-devicons'
-    use {
+        dependencies = {'nvim-lua/plenary.nvim'},
+        config = function()
+            require('plugins.configs.gitsigns')
+        end,
+    },
+     'ryanoasis/vim-devicons',
+     {
         'zirrostig/vim-schlepp',
-        config = [[require('plugins.configs.schlepp')]],
-    }
-    use 'editorconfig/editorconfig-vim'
-    use { 'nvim-treesitter/nvim-treesitter',
-    config = [[require('plugins.configs.treesitter')]],
-    run = function()
+        config = function()
+            require('plugins.configs.schlepp')
+        end,
+    },
+     'editorconfig/editorconfig-vim',
+     { 'nvim-treesitter/nvim-treesitter',
+    config = function()
+        require('plugins.configs.treesitter')
+    end,
+    build = function()
         vf.TSUpdate()
-    end}
-    use 'rktjmp/lush.nvim'
-    use {
+    end},
+     'rktjmp/lush.nvim',
+     {
         'hoob3rt/lualine.nvim',
-        requires = {'kyazdani42/nvim-web-devicons', opt = true},
-        config = [[require('plugins.configs.lualine')]],
-    }
-    use {
+        dependencies = {'kyazdani42/nvim-web-devicons', lazy = true},
+        config = function()
+            require('plugins.configs.lualine')
+        end,
+    },
+     {
         "lukas-reineke/indent-blankline.nvim",
-        config = [[require('plugins.configs.indent_blankline')]],
-    }
-    use {
+        config = function()
+            require('plugins.configs.indent_blankline')
+        end,
+    },
+     {
         'akinsho/bufferline.nvim',
-        tag="v2.*",
-        requires = 'kyazdani42/nvim-web-devicons',
-        config = [[require('plugins.configs.bufferline')]],
-    }
-    use 'kdheepak/lazygit.nvim'
-    use {
+        version="v2.*",
+        dependencies = 'kyazdani42/nvim-web-devicons',
+        config = function()
+            require('plugins.configs.bufferline')
+        end,
+    },
+     'kdheepak/lazygit.nvim',
+     {
         {
           'nvim-telescope/telescope.nvim',
-          requires = {
+          dependencies = {
             'nvim-lua/popup.nvim',
             'nvim-lua/plenary.nvim',
             'telescope-frecency.nvim',
             'lazygit.nvim'
           },
-          wants = {
-            'popup.nvim',
-            'plenary.nvim',
-            'telescope-frecency.nvim',
-            'lazygit.nvim'
-          },
-          config = [[require("plugins.configs.telescope")]],
+          config = function()
+            require("plugins.configs.telescope")
+          end,
           cmd = 'Telescope',
-          module = 'telescope',
-          setup=[[require('plugins.configs.telescope_setup')]]
+          init=function()
+            require('plugins.configs.telescope_setup')
+          end
         },
         {
           'nvim-telescope/telescope-frecency.nvim',
-          after = 'telescope.nvim',
-          requires = 'tami5/sqlite.lua',
+          dependencies = 'kkharji/sqlite.lua',
         },
-      }
+      },
 
-    use {
+     {
         'phaazon/hop.nvim',
-        as = 'hop',
-        config = [[require('plugins.configs.hopword')]],
-    }
+        name = 'hop',
+        config = function()
+            require('plugins.configs.hopword')
+        end,
+    },
 
-    use {
-        "vhyrro/neorg",
+     {
+        "nvim-neorg/neorg",
         ft = "norg",
-        config = [[require('plugins.configs.neorg')]],
-    }
-    use 'folke/lsp-colors.nvim'
-    use {
+        build = ":Neorg sync-parsers",
+        config = function()
+            require('plugins.configs.neorg')
+        end,
+        dependencies = { { "nvim-lua/plenary.nvim" } },
+    },
+     'folke/lsp-colors.nvim',
+     {
         "folke/trouble.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
-        config = [[require('plugins.configs.trouble')]],
-    }
-    use {
+        dependencies = "kyazdani42/nvim-web-devicons",
+        config = function()
+            require('plugins.configs.trouble')
+        end,
+    },
+     {
         "folke/which-key.nvim",
-        config = [[require('plugins.configs.which_key')]],
+        config = function()
+            require('plugins.configs.which_key')
+        end,
+    },
+    { 
+        "folke/tokyonight.nvim", 
+        config=function()
+            require('plugins.configs.tokyonight')
+        end 
     }
 
-end)
+})
 

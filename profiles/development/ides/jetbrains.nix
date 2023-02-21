@@ -12,5 +12,6 @@
     datagrip
     phpstorm
     ruby-mine
+    idea-community
   ];
 }

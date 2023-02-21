@@ -16,4 +16,4 @@ local keymaps = {
     {'<leader><leader>', ':Telescope frecency', opts={noremap=true}}
 }
 
-require('legendary').bind_keymaps(keymaps)
+require('legendary').keymaps(keymaps)

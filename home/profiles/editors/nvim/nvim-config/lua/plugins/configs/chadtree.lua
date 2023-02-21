@@ -1,1 +1,1 @@
-require('legendary').bind_keymap({'<leader>ch', '<cmd>CHADopen<CR>'})
+require('legendary').keymap({'<leader>ch', '<cmd>CHADopen<CR>'})

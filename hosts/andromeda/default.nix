@@ -20,8 +20,8 @@
   ];
   services.openssh = {
     enable = true;
-    permitRootLogin = "no";
-    passwordAuthentication = false;
+    settings.permitRootLogin = "no";
+    settings.passwordAuthentication = false;
     hostKeys = [
       {
         path = "/persist/etc/ssh/ssh_host_ed25519_key";

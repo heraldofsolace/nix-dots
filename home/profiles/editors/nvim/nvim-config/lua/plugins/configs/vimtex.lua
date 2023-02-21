@@ -34,4 +34,4 @@ local keymaps = {
     },
 }
 
-require('legendary').bind_keymaps(keymaps)
+require('legendary').keymaps(keymaps)

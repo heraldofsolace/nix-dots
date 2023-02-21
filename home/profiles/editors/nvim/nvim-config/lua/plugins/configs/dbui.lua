@@ -1,1 +1,1 @@
-require('legendary').bind_keymap({'<leader>db', ':DBUI<cr>', opts={silent=true, noremap=true}})
+require('legendary').keymap({'<leader>db', ':DBUI<cr>', opts={silent=true, noremap=true}})
