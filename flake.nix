@@ -131,11 +131,12 @@
               users = digga.lib.rakeLeaves ./users;
             };
           suites = with profiles; rec {
-            base = [core users.aniket users.root];
+            base = [users.aniket users.root];
             desktop-plasma = base ++ [desktop.plasma];
             desktop-gnome = base ++ [desktop.gnome];
             andromeda = [
               base
+              core.andromeda
               # desktop-gnome
               desktop-plasma
               development.cc
@@ -157,7 +158,9 @@
             ];
             horologium = [
               base
+              core.horologium
               desktop-plasma
+              # desktop-gnome
               development.cc
               development.node
               development.python

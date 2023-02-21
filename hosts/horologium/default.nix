@@ -5,7 +5,7 @@
   inputs,
   ...
 }: {
-  imports = [./hardware-configuration.nix inputs.grub2-themes.nixosModule] ++ suites.horologium;
+  imports = [./hardware-configuration.nix inputs.grub2-themes.nixosModules.default] ++ suites.horologium;
 
   # Setup keyfile
   boot.initrd.secrets = {
@@ -50,7 +50,6 @@
 
   services.geoclue2.enable = true;
   services.gnome.gnome-keyring.enable = true;
-
   security.polkit.enable = true;
 
   system.configurationRevision = lib.mkIf (self ? rev) self.rev;
