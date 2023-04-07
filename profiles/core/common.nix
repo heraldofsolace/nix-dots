@@ -46,6 +46,8 @@ in {
       gptfdisk
       iputils
       usbutils
+      wine
+      winetricks
     ];
     shells = [pkgs.fish];
 
@@ -181,4 +183,7 @@ in {
 
   # Service that makes Out of Memory Killer more effective
   services.earlyoom.enable = true;
+
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = pkg: true;
 }

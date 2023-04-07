@@ -155,6 +155,7 @@
               misc.op
               misc.gparted
               security.sudo
+              astronomy
             ];
             horologium = [
               base
