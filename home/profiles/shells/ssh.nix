@@ -4,6 +4,12 @@
     extraConfig = ''
       IdentityAgent ~/.1password/agent.sock
     '';
+    matchBlocks = {
+      "rpi" = {
+        hostname = "pi.hole";
+        user = "pi";
+      };
+    };
   };
 
   # xdg.configFile."autostart/ssh-add.desktop".text = ''

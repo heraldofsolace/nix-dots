@@ -52,7 +52,14 @@
 
   services.zfs = {
     autoScrub.enable = true;
-    autoSnapshot.enable = true;
+    autoSnapshot = {
+      enable = true;
+      frequent = 1;
+      hourly = 1;
+      daily = 1;
+      monthly = 1;
+      weekly = 1;
+    };
     # TODO: autoReplication
   };
   systemd.services.zfs-mount.enable = false;
